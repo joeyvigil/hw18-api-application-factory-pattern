@@ -1,7 +1,5 @@
 # hw18-api-application-factory-pattern
-Flask project using application factory pattern
-
-***
+*Flask project using application factory pattern*
 
 Hopefully at this point you have been following along with each Practice Assignment and should only have a few pieces left to put into place. Everything from those Practice Assignments will be required in this Knowledge check.
 
