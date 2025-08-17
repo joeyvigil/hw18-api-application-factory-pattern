@@ -3,6 +3,21 @@
 
 Hopefully at this point you have been following along with each Practice Assignment and should only have a few pieces left to put into place. Everything from those Practice Assignments will be required in this Knowledge check.
 
+```
+/project
+├── /app
+│   ├── __init__.py - create_app() lives here
+│   ├── extensions.py
+│   ├── /blueprints
+│	│	├──/user
+│	│	├──__init__.py  - Initialize User Blueprint
+│	│	├── routes.py  - Create User Controllers/routes
+│	│	└── schemas.py
+│   └── models.py
+├── app.py
+└── config.py
+```
+
 ## Blueprint:
 Create Blueprint folders for mechanic and service ticket. Each Blueprint folder should have the following:
 
