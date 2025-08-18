@@ -17,7 +17,7 @@ def create_app(config_name):
     db.init_app(app)
     ma.init_app(app)
 
-    #Register blueprints
+    #Register blueprints 
     app.register_blueprint(customers_bp, url_prefix='/customers')
     app.register_blueprint(mechanics_bp, url_prefix='/mechanics')
     app.register_blueprint(service_mechanics_bp, url_prefix='/service_mechanics')
