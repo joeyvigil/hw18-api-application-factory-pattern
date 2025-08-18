@@ -1,64 +1,63 @@
 from datetime import date
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy import Date, ForeignKey, String, Table, Column
+from sqlalchemy import Date, Float, ForeignKey, String, Table, Column
 
-#Create a base class for our models
 class Base(DeclarativeBase):
     pass
-    #could add your own config
 
 
-#Instatiate your SQLAlchemy database:
+
 db = SQLAlchemy(model_class = Base)
 
 
-loan_books = Table(
-    'loan_books',
-    Base.metadata,
-    Column('loan_id', ForeignKey('loans.id')),
-    Column('book_id', ForeignKey('books.id'))
-)
-
-
-class Users(Base):
-    __tablename__ = 'users' #lowercase plural form of resource
+class Customers(Base):
+    __tablename__ = 'customers'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-    email: Mapped[str] = mapped_column(String(360), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(String(120), nullable=False)
-    DOB: Mapped[date] = mapped_column(Date, nullable=True)
-    address: Mapped[str] = mapped_column(String(500), nullable=True)
-    role: Mapped[str] = mapped_column(String(30), nullable=False)
+    first_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    last_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    phone: Mapped[str] = mapped_column(String(255))
+    address: Mapped[str] = mapped_column(String(255))
 
-    #One to Many relationship from User to Books
-    loans: Mapped[list['Loans']] = relationship('Loans', back_populates='user')
+    service_tickets: Mapped[list['ServiceTickets']] = relationship('ServiceTickets', back_populates='customer')
 
-  
-class Loans(Base):
-    __tablename__ = 'loans'
+
+class Mechanics(Base):
+    __tablename__ = 'mechanics'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
-    loan_date: Mapped[date] = mapped_column(Date, nullable=True)
-    deadline: Mapped[date] = mapped_column(Date, nullable=True)
-    return_date: Mapped[date] = mapped_column(Date, nullable=True)
+    first_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    last_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(String(255), nullable=False)
+    salary: Mapped[float] = mapped_column(Float)
+    address: Mapped[str] = mapped_column(String(255))
 
-    #Relationships
-    user: Mapped['Users'] = relationship('Users', back_populates='loans')
-    books: Mapped[list['Books']] = relationship("Books", secondary=loan_books, back_populates='loans') #Many to Many relationship going through the loan_books table
-   
+    service_mechanics: Mapped[list['ServiceMechanics']] = relationship('ServiceMechanics', back_populates='mechanic')
 
-class Books(Base):
-    __tablename__ = 'books'
+
+class ServiceTickets(Base):
+    __tablename__ = 'service_tickets'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-    genre: Mapped[str] = mapped_column(String(360), unique=True, nullable=False)
-    age_category: Mapped[str] = mapped_column(String(120), nullable=False)
-    publish_date: Mapped[date] = mapped_column(Date, nullable=True)
-    author: Mapped[str] = mapped_column(String(500), nullable=True)
+    customer_id: Mapped[int] = mapped_column(ForeignKey('customers.id', ondelete='CASCADE'), nullable=False)
+    service_desc: Mapped[str] = mapped_column(String(255), nullable=False)
+    price: Mapped[float] = mapped_column(Float, nullable=False)
+    car_VIM: Mapped[str] = mapped_column(String(255), nullable=False)
+    service_date: Mapped[date] = mapped_column(Date)
+    
+    customer: Mapped['Customers'] = relationship('Customers', back_populates='service_tickets')
+    service_mechanics: Mapped[list['ServiceMechanics']] = relationship('ServiceMechanics', back_populates='service')
 
-    #Relationship
-    loans: Mapped[list['Loans']] = relationship('Loans', secondary=loan_books, back_populates='books')
+
+class ServiceMechanics(Base):
+    __tablename__ = 'service_mechanics'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    ticket_id: Mapped[int] = mapped_column(ForeignKey('service_tickets.id', ondelete='CASCADE'))
+    mechanic_id: Mapped[int] = mapped_column(ForeignKey('mechanics.id', ondelete='CASCADE'))
+
+    mechanic: Mapped['Mechanics'] = relationship('Mechanics', back_populates='service_mechanics')
+    service: Mapped['ServiceTickets'] = relationship('ServiceTickets', back_populates='service_mechanics')

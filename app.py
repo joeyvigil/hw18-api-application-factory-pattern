@@ -1,12 +1,9 @@
 from app.models import db
 from app import create_app
 
-
-app = create_app('DevelopmentConfig')
-
+app = create_app('MechanicConfig')
 
 with app.app_context():
-    db.create_all() #Creating our database tables
-
+    db.create_all() 
 
 app.run()
