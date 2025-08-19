@@ -3,6 +3,7 @@ from .schemas import customer_schema, customers_schema
 from flask import request, jsonify
 from marshmallow import ValidationError
 from app.models import Customers, db
+from app.extensions import limiter, cache
 
 
 # POST '/' : Creates a new Customer
@@ -21,6 +22,7 @@ def create_customer():
 
 # GET '/': Retrieves all Customers
 @customers_bp.route('/', methods=['GET']) 
+@cache.cached(timeout=30)
 def read_customers():
     customers = db.session.query(Customers).all()
     return customers_schema.jsonify(customers), 200
@@ -41,6 +43,7 @@ def delete_customer(customer_id):
 
 # PUT '/<int:id>':  Updates a specific Customer based on the id passed in through the url.
 @customers_bp.route('/<int:customer_id>', methods=['PUT'])
+@limiter.limit("30 per hour")
 def update_customer(customer_id):
     customer = db.session.get(Customers, customer_id) 
 

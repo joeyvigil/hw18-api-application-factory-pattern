@@ -2,6 +2,7 @@ from datetime import date, time
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import Date, Float, ForeignKey, String, Table, Column
+from datetime import datetime
 
 class Base(DeclarativeBase):
     pass
@@ -46,7 +47,7 @@ class ServiceTickets(Base):
     service_desc: Mapped[str] = mapped_column(String(255), nullable=False)
     price: Mapped[float] = mapped_column(Float, nullable=False)
     car_VIM: Mapped[str] = mapped_column(String(255), nullable=False)
-    service_date: Mapped[date] = mapped_column(Date, nullable=True)
+    service_date: Mapped[date] = mapped_column(Date,default=datetime.now())
     
     customer: Mapped['Customers'] = relationship('Customers', back_populates='service_tickets')
     service_mechanics: Mapped[list['ServiceMechanics']] = relationship('ServiceMechanics', back_populates='service')

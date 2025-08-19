@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "81243233-23b4-470c-accc-95cb5d8bcd01",
+		"name": "Mechanic Shop Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19738762",
+		"_collection_link": "https://coding-temple-joey.postman.co/workspace/Flask-API~17d0648e-e577-43f8-b74a-a129ea5bb2ce/collection/19738762-81243233-23b4-470c-accc-95cb5d8bcd01?action=share&source=collection_link&creator=19738762"
+	},
+	"item": [
+		{
+			"name": "new mechanic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"1990 W Philly Ave\",\r\n    \"email\": \"fun@games.com\",\r\n    \"first_name\": \"james\",\r\n    \"last_name\": \"thorton\",\r\n    \"password\": \"123password\",\r\n    \"salary\": 1000000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/mechanics",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"mechanics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all mechanics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/mechanics",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"mechanics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update mechanic at id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\":\"\",\r\n    \"email\": \"james@brown.com\",\r\n    \"first_name\":\"\",\r\n    \"last_name\":\"brown\",\r\n    \"password\": \"\",\r\n    \"salary\": 999999\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/mechanics/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"mechanics",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete mechanic at id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/mechanics/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"mechanics",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post new service ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hi\":\"hi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/service_tickets",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"service_tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get service tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/service_tickets",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"service_tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT service_mechanic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/service_mechanics/2/assign-mechanic/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"service_mechanics",
+						"2",
+						"assign-mechanic",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete service_mechanic",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/service_mechanics/2/remove-mechanic/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"service_mechanics",
+						"2",
+						"remove-mechanic",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
