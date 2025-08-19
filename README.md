@@ -6,14 +6,14 @@ Hopefully at this point you have been following along with each Practice Assign
 ```
 /project
 ├── /app
-│       ├── __init__.py - create_app() lives here
-│       ├── extensions.py
-│       ├── /blueprints
+│   ├── __init__.py - create_app() lives here
+│   ├── extensions.py
+│   ├── /blueprints
 │	│	├──/user
 │	│	├──__init__.py  - Initialize User Blueprint
 │	│	├── routes.py  - Create User Controllers/routes
 │	│	└── schemas.py
-│       └── models.py
+│   └── models.py
 ├── app.py
 └── config.py
 ```
