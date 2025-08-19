@@ -8,4 +8,4 @@ class ServiceMechanicSchema(ma.SQLAlchemyAutoSchema):
         include_fk=True
 
 service_mechanic_schema = ServiceMechanicSchema() 
-service_mechanics_schema = ServiceMechanicSchema(many=True) #Allows this schema to translate a list of ServiceMechanic objects all at once
+service_mechanics_schema = ServiceMechanicSchema(many=True) 
